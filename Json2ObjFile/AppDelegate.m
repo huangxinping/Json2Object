@@ -11,6 +11,12 @@
 
 @implementation AppDelegate
 
+- (id)init {
+	if ((self = [super init])) {
+	}
+	return self;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
 
@@ -21,7 +27,7 @@
 - (NSString *)parse:(NSDictionary *)dictionary className:(NSString *)classname {
 	NSArray *keyArray = [dictionary allKeys];
 
-	NSString *fileStr = [NSString stringWithFormat:@"@interface %@ : NSObject \r\n\r\n", classname];
+	NSString *fileStr = [NSString stringWithFormat:@"\r\n\r\n@interface %@ : NSObject \r\n\r\n", classname];
 
 	for (int i = 0; i < keyArray.count; i++) {
 		NSString *key = [keyArray objectAtIndex:i];
@@ -50,7 +56,16 @@
 
 	fileStr = [fileStr stringByAppendingString:@"\r\n@end"];
 
-	[self.outputTextView setString:[NSString stringWithFormat:@"%@\r\n\r\n\r\n%@", self.outputTextView.string, fileStr]];
+	fileStr = [NSString stringWithFormat:@"%@\r\n\r\n@implementation %@\r\n", fileStr, classname];
+	fileStr = [NSString stringWithFormat:@"%@\r\n- (id)init {", fileStr];
+	fileStr = [NSString stringWithFormat:@"%@\r\n    if ((self = [super init])) {", fileStr];
+	fileStr = [NSString stringWithFormat:@"%@\r\n   }", fileStr];
+	fileStr = [NSString stringWithFormat:@"%@\r\n   return self;", fileStr];
+	fileStr = [NSString stringWithFormat:@"%@\r\n}\r\n", fileStr];
+
+	fileStr = [fileStr stringByAppendingString:@"\r\n@end"];
+
+	[self.outputTextView setString:[NSString stringWithFormat:@"%@%@", self.outputTextView.string, fileStr]];
 	return fileStr;
 }
 
