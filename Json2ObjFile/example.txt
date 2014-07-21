@@ -1,18 +1,75 @@
 {
-  "name": "三年二班",
-  "count": 78,
-  "students": [
-    {
-      "id": 1,
-      "name": "张三"
-    },
-    {
-      "id": 2,
-      "name": "李四"
+  "action" : "zh-Hans/weibo_user_msg/lists/get",
+  "data" : {
+    "count" : 5,
+    "list" : [
+      {
+        "now_msg" : 0,
+        "from_us_id" : "612"
+      },
+      {
+        "now_msg" : 0,
+        "from_us_id" : "564"
+      },
+      {
+        "now_msg" : 0,
+        "from_us_id" : "71"
+      },
+      {
+        "now_msg" : 0,
+        "from_us_id" : "228"
+      },
+      {
+        "now_msg" : 0,
+        "from_us_id" : "22"
+      }
+    ],
+    "user" : {
+      "564" : {
+        "mail" : "youngxf@163.com",
+        "fileid" : "c3f689b38d3bc906a96992a6d1e0a4a1",
+        "us_id" : "564",
+        "nickname" : "测试水军",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/428f23da39d2d6209c91b632556e23d6.png"
+      },
+      "612" : {
+        "mail" : "kai7@hlm.com",
+        "fileid" : "c3f689b38d3bc906a96992a6d1e0a4a1",
+        "us_id" : "612",
+        "nickname" : "kai7",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/428f23da39d2d6209c91b632556e23d6.png"
+      },
+      "71" : {
+        "mail" : "zxcvbnm@qq.com",
+        "fileid" : "bedb1f29664b8eefc22ae84d685bd760",
+        "us_id" : "71",
+        "nickname" : "红楼梦",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/d2fc65c39eb97544d6c2f5cfb927ea86.png"
+      },
+      "228" : {
+        "mail" : "poiuy@1234.com",
+        "fileid" : "04e26676c67256134ea9999c560b1349",
+        "us_id" : "228",
+        "nickname" : "Jack",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/07a72557db664d065447c61f6905b69e.png"
+      },
+      "22" : {
+        "mail" : "hank@iiseeuu.com",
+        "fileid" : "f3709b8ffd6384d3abed06124e9f8901",
+        "us_id" : "22",
+        "nickname" : "韩凯",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/246d8a8b9e91a98bc2eba362fa14de69.png"
+      },
+      "20" : {
+        "mail" : "huangxp@iiseeuu.com",
+        "fileid" : "471242398fd43c6a339ed11893db383d",
+        "us_id" : "20",
+        "nickname" : "小猎豹",
+        "photo" : "http://hongloumeng-img.u.qiniudn.com/960ce97c3f416a36e7eefb281a6c0612.png"
+      }
     }
-  ],
-  "teacher": {
-    "name": "王五麻子",
-    "msg": "班主任"
-  }
+  },
+  "language" : "chinese",
+  "msg" : "请求完成",
+  "state" : 200
 }

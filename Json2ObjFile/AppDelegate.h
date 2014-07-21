@@ -8,9 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "Table_DS_Main.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+typedef NS_ENUM(NSInteger, RequestEnum)
+{
+    RequestENUMGet = 0, //GET
+    RequestENUMPOST, //Post
+};
 
+@interface AppDelegate : NSObject <NSApplicationDelegate,SelectMainDelegate>
+{
+    NSFileManager *fileManager;
+}
 @property (assign) IBOutlet NSWindow *window;
 
 - (IBAction)touchCreateFile:(id)sender;
@@ -23,4 +32,10 @@
 @property (unsafe_unretained) IBOutlet NSTextView *outputTextView;
 @property (weak) IBOutlet NSTextField *requestTextField;
 
+@property (weak) IBOutlet NSPopUpButton *requesetType;
+- (IBAction)touchRequestType:(id)sender;
+@property(nonatomic,assign)RequestEnum type;
+
+@property (weak) IBOutlet NSTableView *postTab;
+@property (nonatomic,weak)IBOutlet Table_DS_Main *mainController;
 @end
