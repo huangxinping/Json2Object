@@ -35,6 +35,8 @@ typedef NS_ENUM(NSInteger, RequestEnum)
 @property (weak) IBOutlet NSPopUpButton *requesetType;
 - (IBAction)touchRequestType:(id)sender;
 @property(nonatomic,assign)RequestEnum type;
+@property (weak) IBOutlet NSTextFieldCell *exportPath;
+@property (weak) IBOutlet NSButton *exportButton;
 
 @property (weak) IBOutlet NSTableView *postTab;
 @property (nonatomic,weak)IBOutlet Table_DS_Main *mainController;

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "JSONKit.h"
 #import "AFHTTPRequestOperationManager.h"
-@interface AppDelegate();
+@interface AppDelegate ();
 
 @end
 
@@ -20,59 +20,57 @@
 
 - (id)init {
 	if ((self = [super init])) {
-       
 	}
 	return self;
 }
 
-
-- (IBAction)touchRequestType:(id)sender
-{
-    self.type = self.requesetType.indexOfSelectedItem;
-    NSLog(@"=====%ld",self.requesetType.indexOfSelectedItem);
+- (IBAction)touchRequestType:(id)sender {
+	self.type = self.requesetType.indexOfSelectedItem;
+	NSLog(@"=====%ld", self.requesetType.indexOfSelectedItem);
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application
-    
 
-    self.mainController.mainDeletate = self;
-    [self createInitfile];
-    self.type = RequestENUMGet;
+
+	self.mainController.mainDeletate = self;
+	[self createInitfile];
+	self.type = RequestENUMGet;
 	[self.textClass setStringValue:@"DSInfoManager"];
 	[self.textView setString:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"example" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil]];
+
+	[self.exportPath setStringValue:[self localDocumentsDirectory]];
 }
 
-- (void)createInitfile
-{
-    if (!fileManager)
-    {
-        fileManager = [NSFileManager defaultManager];
+- (void)createInitfile {
+	if (!fileManager) {
+		fileManager = [NSFileManager defaultManager];
+	}
+}
+
+- (NSString *)localDocumentsDirectory {
+    if (![self.exportPath.stringValue isEqualToString:@""]) {
+        return [self.exportPath stringValue];
     }
-    
-}
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES);
 
--(NSString *)localDocumentsDirectory
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory,                                                                          NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *localPath = [NSString stringWithFormat:@"%@/modelManager",documentsDirectory];
-    
-    
-    NSError *error;
-    
-    if ([fileManager fileExistsAtPath:localPath])
-    {
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+
+	NSString *localPath = [NSString stringWithFormat:@"%@/JSONExport", documentsDirectory];
+
+
+	NSError *error;
+
+	if ([fileManager fileExistsAtPath:localPath]) {
 //        NSLog(@"已经存在");
-    }else
-    {
-        [fileManager createDirectoryAtPath:localPath withIntermediateDirectories:YES attributes:nil error:&error];
-    }
-    
-    return  localPath;
+	}
+	else {
+		[fileManager createDirectoryAtPath:localPath withIntermediateDirectories:YES attributes:nil error:&error];
+	}
+
+	return localPath;
 }
+
 - (NSString *)parse:(NSDictionary *)dictionary className:(NSString *)classname {
 	NSArray *keyArray = [dictionary allKeys];
 	NSString *fileStr = [NSString stringWithFormat:@"\r\n\r\n@interface %@ : NSObject \r\n\r\n", classname];
@@ -104,25 +102,24 @@
 
 	fileStr = [fileStr stringByAppendingString:@"\r\n@end"];
 
-    NSString *head = [NSString stringWithFormat:@"\r\n#import <Foundation/Foundation.h>"];
-    
-    fileStr = [head stringByAppendingString:fileStr];
-    NSError *error;
-    NSString *filePath = [NSString stringWithFormat:@"%@.h",classname];
-    
-    NSString *filePath2 = [[self localDocumentsDirectory] stringByAppendingPathComponent:filePath];
-    if ([fileStr writeToFile:filePath2 atomically:YES encoding:NSUTF8StringEncoding error:&error])
-    {
+	NSString *head = [NSString stringWithFormat:@"\r\n#import <Foundation/Foundation.h>"];
+
+	fileStr = [head stringByAppendingString:fileStr];
+	NSError *error;
+	NSString *filePath = [NSString stringWithFormat:@"%@.h", classname];
+
+	NSString *filePath2 = [[self localDocumentsDirectory] stringByAppendingPathComponent:filePath];
+	if ([fileStr writeToFile:filePath2 atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
 //      NSLog(@"************%@",[fileManager contentsOfDirectoryAtPath:localPath error:&error]);
 //        NSLog(@"创建成功");
-    }else
-    {
-       NSLog(@"************%@",error);
-    }
-    
-     NSString *classhead = [NSString stringWithFormat:@"\r#import \"%@\"\r",filePath];
-    
-    fileStr = [NSString stringWithFormat:@"%@\r%@",fileStr,classhead];
+	}
+	else {
+		NSLog(@"************%@", error);
+	}
+
+	NSString *classhead = [NSString stringWithFormat:@"\r#import \"%@\"\r", filePath];
+
+	fileStr = [NSString stringWithFormat:@"%@\r%@", fileStr, classhead];
 	fileStr = [NSString stringWithFormat:@"%@\r\n\r\n@implementation %@\r\n", fileStr, classname];
 	fileStr = [NSString stringWithFormat:@"%@\r\n- (id)init {", fileStr];
 	fileStr = [NSString stringWithFormat:@"%@\r\n    if ((self = [super init])) {", fileStr];
@@ -132,41 +129,45 @@
 
 	fileStr = [fileStr stringByAppendingString:@"\r\n@end"];
 
-    NSString  *classfileStr = [NSString stringWithFormat:@"\r\n\r\n@implementation %@\r\n", classname];
+	NSString *classfileStr = [NSString stringWithFormat:@"\r\n\r\n@implementation %@\r\n", classname];
 	classfileStr = [NSString stringWithFormat:@"%@\r\n- (id)init {", classfileStr];
 	classfileStr = [NSString stringWithFormat:@"%@\r\n    if ((self = [super init])) {", classfileStr];
 	classfileStr = [NSString stringWithFormat:@"%@\r\n   }", classfileStr];
 	classfileStr = [NSString stringWithFormat:@"%@\r\n   return self;", classfileStr];
 	classfileStr = [NSString stringWithFormat:@"%@\r\n}\r\n", classfileStr];
-    classfileStr = [NSString stringWithFormat:@"%@\r\n\r@end", classfileStr];
-    
-    
-    NSString *classfilePath = [NSString stringWithFormat:@"%@.m",classname];
-   
-    classfileStr = [classhead stringByAppendingString:classfileStr];
-    
-    NSString *classfilePath2 = [[self localDocumentsDirectory] stringByAppendingPathComponent:classfilePath];
-    
-    
-    if ([classfileStr writeToFile:classfilePath2 atomically:YES encoding:NSUTF8StringEncoding error:&error])
-    {
+	classfileStr = [NSString stringWithFormat:@"%@\r\n\r@end", classfileStr];
+
+
+	NSString *classfilePath = [NSString stringWithFormat:@"%@.m", classname];
+
+	classfileStr = [classhead stringByAppendingString:classfileStr];
+
+	NSString *classfilePath2 = [[self localDocumentsDirectory] stringByAppendingPathComponent:classfilePath];
+
+
+	if ([classfileStr writeToFile:classfilePath2 atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
 //        NSLog(@"************%@",[fileManager contentsOfDirectoryAtPath:[self localDocumentsDirectory] error:&error]);
-    }else
-    {
-        NSLog(@"************%@",error);
-    }
+	}
+	else {
+		NSLog(@"************%@", error);
+	}
 	[self.outputTextView setString:[NSString stringWithFormat:@"%@%@", self.outputTextView.string, fileStr]];
 	return fileStr;
 }
 
 - (IBAction)touchCreateFile:(id)sender {
-    
-    NSError *error;
-    NSArray *files = [fileManager contentsOfDirectoryAtPath:[self localDocumentsDirectory] error:&error];
-    for (NSString *file in files)
-    {
-        [fileManager removeItemAtPath:[[self localDocumentsDirectory] stringByAppendingString:file] error:&error];
+    if ([_textView.string isEqualToString:@""]) {
+        NSAlert *alert = [NSAlert alertWithError:[NSError errorWithDomain:@"暂未解析JSON" code:404 userInfo:@{
+                                                                                                           @"reason":@"暂未解析JSON"
+                                                                                                           }]];
+        [alert runModal];
+        return;
     }
+	NSError *error;
+	NSArray *files = [fileManager contentsOfDirectoryAtPath:[self localDocumentsDirectory] error:&error];
+	for (NSString *file in files) {
+		[fileManager removeItemAtPath:[[self localDocumentsDirectory] stringByAppendingString:file] error:&error];
+	}
 	NSString *jsonStr = self.textView.textStorage.string;
 
 	NSDictionary *dic = [self GetDictionaryWithJson:jsonStr];
@@ -179,6 +180,10 @@
 
 	[self.outputTextView setString:@""];
 	[self parse:dic className:self.textClass.stringValue];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"解析结果" defaultButton:@"确定" alternateButton:nil otherButton:nil informativeTextWithFormat:@"完成"];
+    [alert runModal];
+
 }
 
 - (NSDictionary *)GetDictionaryWithJson:(NSString *)jsonStr {
@@ -189,60 +194,47 @@
 	if ([self.requestTextField.stringValue length] <= 0) {
 		return;
 	}
-    
-    if (self.type == RequestENUMGet)
-    {
-        NSString *buffer = [NSString stringWithContentsOfURL:[NSURL URLWithString:self.requestTextField.stringValue] encoding:NSUTF8StringEncoding error:nil];
-        [self.textView setString:buffer];
-    }else
-    {
-        [self requestPostSever:nil];
-    }
+
+	if (self.type == RequestENUMGet) {
+		NSString *buffer = [NSString stringWithContentsOfURL:[NSURL URLWithString:self.requestTextField.stringValue] encoding:NSUTF8StringEncoding error:nil];
+		[self.textView setString:buffer];
+	}
+	else {
+		[self requestPostSever:nil];
+	}
 }
 
-
-- (void)requestPostSever:(NSDictionary *)dic
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+- (void)requestPostSever:(NSDictionary *)dic {
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    NSDictionary *parameters = @{@"limit": @"10",@"token_access":@"9b8e309ee523bba3246ed433365c3861",@"token_login":@"edb80ffb6a05081cdf3bccec8430f10b",@"p":@"1"};
-    [manager POST:self.requestTextField.stringValue parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", [responseObject JSONString]);
-         [self.textView setString:[responseObject JSONString]];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+	[manager POST:self.requestTextField.stringValue parameters:dic success: ^(AFHTTPRequestOperation *operation, id responseObject) {
+	    NSLog(@"JSON: %@", [responseObject JSONString]);
+	    [self.textView setString:[responseObject JSONString]];
+	} failure: ^(AFHTTPRequestOperation *operation, NSError *error) {
+	    NSLog(@"Error: %@", error);
+	}];
 }
 
-
-
-
-- (void)request:(Table_DS_Main *)main requestDic:(NSDictionary *)dic
-{
-    NSLog(@"---------------->%@<--------------",dic);
-    if ([self.requestTextField.stringValue length] <= 0) {
+- (void)request:(Table_DS_Main *)main requestDic:(NSDictionary *)dic {
+	NSLog(@"---------------->%@<--------------", dic);
+	if ([self.requestTextField.stringValue length] <= 0) {
 		return;
 	}
-    
-    if (self.type == RequestENUMGet)
-    {
-        [self requestGetSever];
-    }else
-    {
-        [self requestPostSever:dic];
-    }
-    
+
+	if (self.type == RequestENUMGet) {
+		[self requestGetSever];
+	}
+	else {
+		[self requestPostSever:dic];
+	}
 }
 
-
-
-- (void)requestGetSever
-{
-    
-    NSString *buffer = [NSString stringWithContentsOfURL:[NSURL URLWithString:self.requestTextField.stringValue] encoding:NSUTF8StringEncoding error:nil];
-    [self.textView setString:buffer];
+- (void)requestGetSever {
+	NSString *buffer = [NSString stringWithContentsOfURL:[NSURL URLWithString:self.requestTextField.stringValue] encoding:NSUTF8StringEncoding error:nil];
+	[self.textView setString:buffer];
 //    NSString *url = self.requestTextField.stringValue;
-//    
-//    
+//
+//
 //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"JSON: %@", responseObject);
@@ -250,4 +242,34 @@
 //        NSLog(@"Error: %@", error);
 //    }];
 }
+
+- (IBAction)exportButtonClicked:(id)sender {
+	NSOpenPanel *openDlg = [NSOpenPanel openPanel];
+
+	// Enable the selection of files in the dialog.
+	[openDlg setCanChooseFiles:NO];
+
+	// Enable the selection of directories in the dialog.
+	[openDlg setCanChooseDirectories:YES];
+
+	// Change "Open" dialog button to "Select"
+	[openDlg setPrompt:@"Select"];
+
+	// Display the dialog.  If the OK button was pressed,
+	// process the files.
+	if ([openDlg runModal] == NSOKButton) {
+		// Get an array containing the full filenames of all
+		// files and directories selected.
+		NSArray *files = [openDlg URLs];
+
+		// Loop through all the files and process them.
+		for (int i = 0; i < [files count]; i++) {
+			NSURL *fileName = [files objectAtIndex:i];
+			[self.exportPath setStringValue:[fileName path]];
+			break;
+			// Do something with the filename.
+		}
+	}
+}
+
 @end
