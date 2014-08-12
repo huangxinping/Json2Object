@@ -32,8 +32,9 @@
 		1A1CA94B196D2DA900C97261 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CA941196D2DA900C97261 /* AFURLResponseSerialization.m */; };
 		1A1CA94C196D2DA900C97261 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CA943196D2DA900C97261 /* AFURLSessionManager.m */; };
 		1A1CA94F196D3B3E00C97261 /* Table_DS_Main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CA94E196D3B3E00C97261 /* Table_DS_Main.m */; };
-		1A3CDB22196E25B2000015B8 /* PostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CDB21196E25B2000015B8 /* PostModel.m */; };
+		1A3CDB22196E25B2000015B8 /* ParamsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3CDB21196E25B2000015B8 /* ParamsModel.m */; };
 		1E79ED58196AACD300D6AEEA /* example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E79ED57196AACD300D6AEEA /* example.txt */; };
+		AE093D3D19878CF3007CF17F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AE093D3C19878CF3007CF17F /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,9 +93,10 @@
 		1A1CA943196D2DA900C97261 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		1A1CA94D196D3B3E00C97261 /* Table_DS_Main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table_DS_Main.h; sourceTree = "<group>"; };
 		1A1CA94E196D3B3E00C97261 /* Table_DS_Main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table_DS_Main.m; sourceTree = "<group>"; };
-		1A3CDB20196E25B2000015B8 /* PostModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostModel.h; sourceTree = "<group>"; };
-		1A3CDB21196E25B2000015B8 /* PostModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostModel.m; sourceTree = "<group>"; };
+		1A3CDB20196E25B2000015B8 /* ParamsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParamsModel.h; sourceTree = "<group>"; };
+		1A3CDB21196E25B2000015B8 /* ParamsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParamsModel.m; sourceTree = "<group>"; };
 		1E79ED57196AACD300D6AEEA /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
+		AE093D3C19878CF3007CF17F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +126,9 @@
 		18248B341958272600038F33 = {
 			isa = PBXGroup;
 			children = (
-				1A3CDB20196E25B2000015B8 /* PostModel.h */,
-				1A3CDB21196E25B2000015B8 /* PostModel.m */,
+				AE093D3C19878CF3007CF17F /* logo.png */,
+				1A3CDB20196E25B2000015B8 /* ParamsModel.h */,
+				1A3CDB21196E25B2000015B8 /* ParamsModel.m */,
 				1A1CA930196D2DA900C97261 /* AFNetworking */,
 				18248B741958285600038F33 /* JSON */,
 				18248B461958272600038F33 /* Json2ObjFile */,
@@ -326,6 +329,7 @@
 			files = (
 				18248B4B1958272600038F33 /* InfoPlist.strings in Resources */,
 				18248B591958272600038F33 /* Images.xcassets in Resources */,
+				AE093D3D19878CF3007CF17F /* logo.png in Resources */,
 				1E79ED58196AACD300D6AEEA /* example.txt in Resources */,
 				18248B511958272600038F33 /* Credits.rtf in Resources */,
 				18248B571958272600038F33 /* MainMenu.xib in Resources */,
@@ -358,7 +362,7 @@
 				1A1CA946196D2DA900C97261 /* AFHTTPSessionManager.m in Sources */,
 				1A1CA94A196D2DA900C97261 /* AFURLRequestSerialization.m in Sources */,
 				1A1CA94C196D2DA900C97261 /* AFURLSessionManager.m in Sources */,
-				1A3CDB22196E25B2000015B8 /* PostModel.m in Sources */,
+				1A3CDB22196E25B2000015B8 /* ParamsModel.m in Sources */,
 				18248B4D1958272600038F33 /* main.m in Sources */,
 				18248B771958285600038F33 /* JSONKit.m in Sources */,
 			);
