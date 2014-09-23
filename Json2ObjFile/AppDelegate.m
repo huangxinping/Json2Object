@@ -220,6 +220,19 @@
 	}
 	NSString *jsonStr = self.textView.textStorage.string;
     
+    if ([[jsonStr objectFromJSONString] isKindOfClass:[NSArray class]])
+    {
+        NSLog(@"这是一个数组");
+        
+        NSDictionary *listDic = @{@"list": [jsonStr objectFromJSONString]};
+        [self.outputTextView setString:@""];
+        [self parse:listDic className:self.textClass.stringValue];
+        
+        NSAlert *alert = [NSAlert alertWithMessageText:@"解析结果" defaultButton:@"确定" alternateButton:nil otherButton:nil informativeTextWithFormat:@"完成"];
+        [alert runModal];
+        return;
+    }
+
 	NSDictionary *dic = [self GetDictionaryWithJson:jsonStr];
 	if (dic == nil)
     {
@@ -229,11 +242,11 @@
 		return;
 	}
     
-	[self.outputTextView setString:@""];
-	[self parse:dic className:self.textClass.stringValue];
+    [self.outputTextView setString:@""];
+    [self parse:dic className:self.textClass.stringValue];
     
-	NSAlert *alert = [NSAlert alertWithMessageText:@"解析结果" defaultButton:@"确定" alternateButton:nil otherButton:nil informativeTextWithFormat:@"完成"];
-	[alert runModal];
+    NSAlert *alert = [NSAlert alertWithMessageText:@"解析结果" defaultButton:@"确定" alternateButton:nil otherButton:nil informativeTextWithFormat:@"完成"];
+    [alert runModal];
 }
 
 - (NSDictionary *)GetDictionaryWithJson:(NSString *)jsonStr

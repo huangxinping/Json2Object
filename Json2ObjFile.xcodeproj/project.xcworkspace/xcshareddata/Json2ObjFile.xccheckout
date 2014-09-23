@@ -10,29 +10,29 @@
 	<string>Json2ObjFile</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C7323DB4-A871-408D-982B-C5E75AE1D85D</key>
+		<key>753E353971B9B9D4BA538EE220ECD1AC2747A909</key>
 		<string>ssh://github.com/huangxinping/Json2Object.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Json2ObjFile.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C7323DB4-A871-408D-982B-C5E75AE1D85D</key>
+		<key>753E353971B9B9D4BA538EE220ECD1AC2747A909</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/huangxinping/Json2Object.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C7323DB4-A871-408D-982B-C5E75AE1D85D</string>
+	<string>753E353971B9B9D4BA538EE220ECD1AC2747A909</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C7323DB4-A871-408D-982B-C5E75AE1D85D</string>
+			<string>753E353971B9B9D4BA538EE220ECD1AC2747A909</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Json2Object</string>
 		</dict>
